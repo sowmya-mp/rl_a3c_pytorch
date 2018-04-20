@@ -7,9 +7,10 @@ from utils import ensure_shared_grads
 from model import A3Clstm
 from player_util import Agent
 from torch.autograd import Variable
+from transfer_util import frame2attention
 
 
-def train(rank, args, shared_model, optimizer, env_conf):
+def train(rank, args, shared_model, optimizer, env_conf, blur_conf):
     ptitle('Training Agent: {}'.format(rank))
     gpu_id = args.gpu_ids[rank % len(args.gpu_ids)]
     torch.manual_seed(args.seed + rank)
@@ -23,12 +24,13 @@ def train(rank, args, shared_model, optimizer, env_conf):
             optimizer = optim.Adam(
                 shared_model.parameters(), lr=args.lr, amsgrad=args.amsgrad)
     env.seed(args.seed + rank)
-    player = Agent(None, env, args, None)
+    player = Agent(None, env, args, None, blur_conf)
     player.gpu_id = gpu_id
     player.model = A3Clstm(
         player.env.observation_space.shape[0], player.env.action_space)
 
     player.state = player.env.reset()
+    player.state, _, _, _ = frame2attention(player.state, blur_conf, str(env.spec))
     player.state = torch.from_numpy(player.state).float()
     if gpu_id >= 0:
         with torch.cuda.device(gpu_id):
@@ -64,6 +66,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
             if player.info['ale.lives'] == 0 or player.max_length:
                 player.eps_len = 0
             state = player.env.reset()
+            state, _, _, _ = frame2attention(state, blur_conf, str(env.spec))
             player.eps_len += 2
             player.state = torch.from_numpy(state).float()
             if gpu_id >= 0:

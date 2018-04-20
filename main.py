@@ -125,6 +125,10 @@ parser.add_argument(
     default=4,
     metavar='SR',
     help='frame skip rate (default: 4)')
+parser.add_argument(
+    '--config_blur',
+    default='config.json',
+    help='Load the config for blurring frames')
 
 
 # Based on
@@ -166,13 +170,16 @@ if __name__ == '__main__':
 
     processes = []
 
+    blur_json = read_config(args.config_blur)
+    config_blur = blur_json["Default"]
+
     p = mp.Process(target=test, args=(args, shared_model, env_conf))
     p.start()
     processes.append(p)
     time.sleep(0.1)
     for rank in range(0, args.workers):
         p = mp.Process(target=train, args=(
-            rank, args, shared_model, optimizer, env_conf))
+            rank, args, shared_model, optimizer, env_conf, config_blur))
         p.start()
         processes.append(p)
         time.sleep(0.1)
