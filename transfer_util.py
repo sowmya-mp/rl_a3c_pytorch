@@ -26,13 +26,16 @@ def dist_exp(im):
     return new_im.astype(np.uint8)
 
 def frame2attention(frame, config, environment):
+    print(frame.shape)
+    frame = np.transpose(frame,[1,2,0])
     frame = frame[config["crop1"]:config["crop2"] + 160, :160]
     old_frame = frame
     orig_ata = frame
     dilation = frame
 
+    print(frame.shape)
     frame = cv2.resize(frame, (256, 256))
-    # cv2.imwrite(im_path_A, frame[:,:,::-1])
+    cv2.imwrite("test_frames/dump_original.jpg", frame[:,:,::-1])
     frame = rgb2gray(frame) * 255.
     orig_ata = frame
     # st()
@@ -57,5 +60,5 @@ def frame2attention(frame, config, environment):
 
     frame = np.stack((dilation, exp_im_dist_1, exp_im_dist), axis=-1)
 
-    # cv2.imwrite(im_path_B, frame[:,:,::-1])
+    cv2.imwrite("test_frames/dump_blurr.jpg", frame[:,:,::-1])
     return frame, orig_ata, old_frame, dilation

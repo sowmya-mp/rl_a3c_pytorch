@@ -173,7 +173,7 @@ if __name__ == '__main__':
     blur_json = read_config(args.config_blur)
     config_blur = blur_json["Default"]
 
-    p = mp.Process(target=test, args=(args, shared_model, env_conf))
+    p = mp.Process(target=test, args=(args, shared_model, env_conf, config_blur))
     p.start()
     processes.append(p)
     time.sleep(0.1)
