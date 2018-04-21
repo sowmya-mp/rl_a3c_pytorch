@@ -38,8 +38,7 @@ def frame2attention(frame, config, environment):
     cv2.imwrite("test_frames/dump_original.jpg", frame[:,:,::-1])
     frame = rgb2gray(frame) * 255.
     orig_ata = frame
-    # st()
-    # median_im = np.zeros((256,256))o
+
     if 'Pong' in environment:
         median_im = 87.
         frame = np.absolute((frame - median_im)).astype(np.uint8)

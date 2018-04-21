@@ -6,7 +6,7 @@ from torch.autograd import Variable
 
 
 class Agent(object):
-    def __init__(self, model, env, args, state, blur_config):
+    def __init__(self, model, env, args, state):
         self.model = model
         self.env = env
         self.current_life = 0
@@ -24,7 +24,6 @@ class Agent(object):
         self.reward = 0
         self.gpu_id = -1
         self.max_length = False
-        self.blur_config = blur_config
 
     def action_train(self):
         value, logit, (self.hx, self.cx) = self.model(
@@ -37,7 +36,6 @@ class Agent(object):
         log_prob = log_prob.gather(1, Variable(action))
         state, self.reward, self.done, self.info = self.env.step(
             action.cpu().numpy())
-        state, _, _, _ = frame2attention(state, self.blur_config, str(self.env.spec))
         self.state = torch.from_numpy(state).float()
         if self.gpu_id >= 0:
             with torch.cuda.device(self.gpu_id):
@@ -76,7 +74,6 @@ class Agent(object):
         prob = F.softmax(logit, dim=1)
         action = prob.max(1)[1].data.cpu().numpy()
         state, self.reward, self.done, self.info = self.env.step(action[0])
-        state, _, _, _ = frame2attention(state, self.blur_config, str(self.env.spec))
         self.state = torch.from_numpy(state).float()
         if self.gpu_id >= 0:
             with torch.cuda.device(self.gpu_id):

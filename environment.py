@@ -8,7 +8,9 @@ from cv2 import resize
 #from skimage.transform import resize
 #from scipy.misc import imresize as resize
 import random
-
+from transfer_util import frame2attention
+import cv2
+from skimage.color import rgb2gray
 
 def atari_env(env_id, env_conf, args):
     env = gym.make(env_id)
@@ -26,9 +28,12 @@ def atari_env(env_id, env_conf, args):
 
 def process_frame(frame, conf):
     frame = frame[conf["crop1"]:conf["crop2"] + 160, :160]
-    frame = frame.mean(2)
-    frame = frame.astype(np.float32)
-    frame *= (1.0 / 255.0)
+    if False:
+        frame = frame.mean(2)
+        frame = frame.astype(np.float32)
+        frame *= (1.0 / 255.0)
+    else:
+        frame = rgb2gray(frame)
     frame = resize(frame, (80, conf["dimension2"]))
     frame = resize(frame, (80, 80))
     frame = np.reshape(frame, [1, 80, 80])
@@ -42,6 +47,7 @@ class AtariRescale(gym.ObservationWrapper):
         self.conf = env_conf
 
     def observation(self, observation):
+        frame, _, _, _ = frame2attention(observation, self.conf, str(self.env.spec))
         return process_frame(observation, self.conf)
 
 
