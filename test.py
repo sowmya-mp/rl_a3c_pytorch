@@ -11,7 +11,7 @@ import logging
 from transfer_util import frame2attention
 
 
-def test(args, shared_model, env_conf, blur_conf):
+def test(args, shared_model, env_conf):
     ptitle('Test Agent')
     gpu_id = args.gpu_ids[-1]
     log = {}
@@ -31,13 +31,13 @@ def test(args, shared_model, env_conf, blur_conf):
     start_time = time.time()
     num_tests = 0
     reward_total_sum = 0
-    player = Agent(None, env, args, None, blur_conf)
+    player = Agent(None, env, args, None)
     player.gpu_id = gpu_id
     player.model = A3Clstm(
         player.env.observation_space.shape[0], player.env.action_space)
 
     player.state = player.env.reset()
-    player.state, _, _, _ = frame2attention(player.state, blur_conf, str(env.spec))
+    #player.state, _, _, _ = frame2attention(player.state, blur_conf, str(env.spec))
     player.eps_len += 2
     player.state = torch.from_numpy(player.state).float()
     if gpu_id >= 0:
