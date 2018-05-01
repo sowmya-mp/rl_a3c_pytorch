@@ -35,7 +35,7 @@ def frame2attention(frame, config, environment):
 
     #print(frame.shape)
     frame = cv2.resize(frame, (256, 256))
-    cv2.imwrite('frames/original.jpg', frame)
+    #cv2.imwrite('frames/original.jpg', frame)
     frame = rgb2gray(frame) * 255.
     orig_ata = frame
 
@@ -62,5 +62,5 @@ def frame2attention(frame, config, environment):
     if 'Pong' in environment:
         frame = np.transpose(frame, [1, 0, 2])
 
-    cv2.imwrite('frames/blurred.jpg', frame)
+    #cv2.imwrite('frames/blurred.jpg', frame)
     return frame, orig_ata, old_frame, dilation
