@@ -12,7 +12,8 @@ from test import test
 from shared_optim import SharedRMSprop, SharedAdam
 #from gym.configuration import undo_logger_setup
 import time
-
+from tools import *
+from trainers import *
 
 #undo_logger_setup()
 parser = argparse.ArgumentParser(description='A3C')
@@ -125,6 +126,11 @@ parser.add_argument(
     default=4,
     metavar='SR',
     help='frame skip rate (default: 4)')
+parser.add_argument(
+    '--use_convertor',
+    default=True,
+    metavar='ENV',
+    help='If should use the mapper')
 
 
 # Based on
@@ -146,7 +152,24 @@ if __name__ == '__main__':
     for i in setup_json.keys():
         if i in args.env:
             env_conf = setup_json[i]
-    env = atari_env(args.env, env_conf, args)
+
+    if args.use_convertor:
+        convertor_config = NetConfig('conversion_models/attention_breakout2pong_dual.yaml')
+        hyperparameters = {}
+        for key in convertor_config.hyperparameters:
+            exec ('hyperparameters[\'%s\'] = convertor_config.hyperparameters[\'%s\']' % (key, key))
+
+        trainer = []
+        exec ("trainer=%s(convertor_config.hyperparameters)" % convertor_config.hyperparameters['trainer'])
+        trainer.gen.load_state_dict(torch.load('/Users/sowmya/PycharmProjects/rl_a3c_pytorch/conversion_models/attentionbreakout2pong_v0_gen_00003500.pkl'))
+        trainer.cuda(args.gpu_ids)
+        distance_gan = trainer
+    else:
+        convertor_config = None
+        distance_gan = None
+    convertor = distance_gan
+
+    env = atari_env(args.env, env_conf, args, convertor, convertor_config, mapFrames=False)
     shared_model = A3Clstm(env.observation_space.shape[0], env.action_space)
     if args.load:
         saved_state = torch.load('{0}{1}.dat'.format(

@@ -64,3 +64,50 @@ def frame2attention(frame, config, environment):
 
     #cv2.imwrite('frames/blurred.jpg', frame)
     return frame, orig_ata, old_frame, dilation
+
+def create_xy_image(width=256):
+    coordinates = list(itertools.product(range(width), range(width)))
+    arr = (np.reshape(np.asarray(coordinates), newshape=[width, width, 2]) - width/2 ) / float((width/2))
+    new_map = np.transpose(np.float32(arr), [2, 0, 1])
+    xy = torch.from_numpy(new_map).clone()
+    xy = xy.unsqueeze(0).expand(1, xy.size(0), xy.size(1), xy.size(2))
+    return xy
+
+def attention_process_frame(frame, gan_trainer, gan_config):
+
+    blurr = False
+    rotate_A = gan_config.datasets['train_a']['rotation']
+    rotate_B = gan_config.datasets['train_b']['rotation']
+    cols = frame.shape[1]
+    rows = frame.shape[0]
+    M = cv2.getRotationMatrix2D((cols / 2, rows / 2), rotate_A, 1)
+    frame = cv2.warpAffine(frame, M, (cols, rows))
+    frame = frame.transpose(2, 0, 1)
+    if not blurr:
+        frame = frame[-1:, :, :]
+    final_data = torch.from_numpy((frame / 255.0 - 0.5) * 2).float().clone()
+    final_data = final_data.contiguous()
+    final_data = final_data.resize_(1, final_data.size(0), final_data.size(1), final_data.size(2))
+
+    #Use xy flag
+    xy = create_xy_image()
+    final_data = torch.cat([final_data, xy], 1)
+    final_data_in = Variable(final_data.cuda())
+    final_data_in = final_data_in.contiguous()
+
+    output_data = gan_trainer.gen.forward_a2b(final_data_in)
+
+    output_img = output_data[0].data.cpu().numpy()
+    new_output_img = np.transpose(output_img, [2, 3, 1, 0])
+    new_output_img = new_output_img[:, :, :, 0]
+    out_img = np.uint8(255 * (new_output_img / 2 + 0.5))
+    frame = out_img
+    cols = frame.shape[1]
+    rows = frame.shape[0]
+    M = cv2.getRotationMatrix2D((cols / 2, rows / 2), 360 - rotate_B, 1)
+    frame = cv2.warpAffine(frame, M, (cols, rows))
+
+    if frame.shape[-1] != 3:
+        frame = np.stack((frame, frame, frame), axis=-1)
+
+    return frame
