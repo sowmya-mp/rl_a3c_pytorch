@@ -3,7 +3,7 @@ import torch
 import torch.nn.functional as F
 from transfer_util import frame2attention
 from torch.autograd import Variable
-
+import numpy as np
 
 class Agent(object):
     def __init__(self, model, env, args, state):
@@ -24,6 +24,8 @@ class Agent(object):
         self.reward = 0
         self.gpu_id = -1
         self.max_length = False
+        self.translator = None
+        self.translate_test = False
 
     def action_train(self):
         value, logit, (self.hx, self.cx) = self.model(
@@ -33,7 +35,13 @@ class Agent(object):
         entropy = -(log_prob * prob).sum(1)
         self.entropies.append(entropy)
         action = prob.multinomial().data
+        # print("action:", action)
         log_prob = log_prob.gather(1, Variable(action))
+        if self.translate_test:
+            # print("before", action)
+            # print("after", self.translator[action[0][0]])
+            action = torch.from_numpy(np.asarray([[self.translator[action[0][0]]]]))
+            # print("after1", action)
         state, self.reward, self.done, self.info = self.env.step(
             action.cpu().numpy())
         self.state = torch.from_numpy(state).float()
@@ -49,6 +57,8 @@ class Agent(object):
                 self.max_length = False
         else:
             self.max_length = False
+
+
         self.reward = max(min(self.reward, 1), -1)
         self.values.append(value)
         self.log_probs.append(log_prob)

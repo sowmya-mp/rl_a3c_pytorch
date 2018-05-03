@@ -43,7 +43,7 @@ parser.add_argument(
 parser.add_argument(
     '--workers',
     type=int,
-    default=32,
+    default=2,
     metavar='W',
     help='how many training processes to use (default: 32)')
 parser.add_argument(
@@ -60,14 +60,14 @@ parser.add_argument(
     help='maximum length of an episode (default: 10000)')
 parser.add_argument(
     '--env',
-    default='Pong-v0',
+    default='Breakout-v0',
     metavar='ENV',
-    help='environment to train on (default: Pong-v0)')
+    help='Target environment to train on (default: Pong-v0)')
 parser.add_argument(
     '--env-config',
     default='config.json',
     metavar='EC',
-    help='environment to crop and resize info (default: config.json)')
+    help='Target environment to crop and resize info (default: config.json)')
 parser.add_argument(
     '--shared-optimizer',
     default=True,
@@ -126,6 +126,24 @@ parser.add_argument(
     metavar='SR',
     help='frame skip rate (default: 4)')
 
+# (Akshita) Arguments required for transfer learning.
+parser.add_argument(
+    '--model-env',
+    default='Pong-v0',
+    metavar='MENV',
+    help='Source environment to train on (default: Pong-v0)')
+parser.add_argument(
+    '--model-env-config',
+    default='config.json',
+    metavar='MEC',
+    help='Source environment to crop and resize info (default: config.json)')
+parser.add_argument(
+    '--workers-transfer',
+    type=int,
+    default=2,
+    metavar='WT',
+    help='how many training processes to use (default: 2)')
+
 
 # Based on
 # https://github.com/pytorch/examples/tree/master/mnist_hogwild
@@ -147,7 +165,21 @@ if __name__ == '__main__':
         if i in args.env:
             env_conf = setup_json[i]
     env = atari_env(args.env, env_conf, args)
+
+    #(Akshita): Set up environment for the source game as well.
+    setup_json = read_config(args.model_env_config)
+    model_env_conf = setup_json["Default"]
+    for i in setup_json.keys():
+        if i in args.model_env:
+            model_env_conf = setup_json[i]
+    model_env = atari_env(args.model_env, model_env_conf, args)
+
+
     shared_model = A3Clstm(env.observation_space.shape[0], env.action_space)
+
+
+    # (TODO): We need to load the pretrained Pong weights so that the last layer (Ac-
+    # tion spaces are different) does not get loaded.
     if args.load:
         saved_state = torch.load('{0}{1}.dat'.format(
             args.load_model_dir, args.env), map_location=lambda storage, loc: storage)
@@ -177,6 +209,13 @@ if __name__ == '__main__':
     for rank in range(0, args.workers):
         p = mp.Process(target=train, args=(
             rank, args, shared_model, optimizer, env_conf))
+        p.start()
+        processes.append(p)
+        time.sleep(0.1)
+    # (Akshita): Adding the conversion workers here.
+    for rank1 in range(rank + 1, rank + 1 + args.workers_transfer):
+        p = mp.Process(target=train, args=(
+            rank1, args, shared_model, optimizer, env_conf, model_env_conf, True))
         p.start()
         processes.append(p)
         time.sleep(0.1)

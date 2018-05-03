@@ -8,15 +8,31 @@ from model import A3Clstm
 from player_util import Agent
 from torch.autograd import Variable
 from transfer_util import frame2attention
+from utils import get_translator_from_source
 
 
-def train(rank, args, shared_model, optimizer, env_conf):
+def train(rank, args, shared_model, optimizer, env_conf, model_env_conf=None, convert_model=False, convertor=None):
     ptitle('Training Agent: {}'.format(rank))
     gpu_id = args.gpu_ids[rank % len(args.gpu_ids)]
     torch.manual_seed(args.seed + rank)
     if gpu_id >= 0:
         torch.cuda.manual_seed(args.seed + rank)
-    env = atari_env(args.env, env_conf, args)
+
+    # TODO(Akshita): Change this to make the environments as required.
+    # TODO(Sowmya and Akshita): Make sure that the arguments of atari_env match the function. They currently do not.
+    # env = atari_env(args.env, env_conf, args)
+    num_of_actions = 4
+    if convert_model:
+        env = atari_env("{}".format(args.model_env), model_env_conf, args)
+        # env_id = args.model_env
+        num_of_actions = atari_env("{}".format(args.env), env_conf, args).action_space
+    else:
+        env = atari_env("{}".format(args.env), env_conf, args)
+        # env_id = args.env
+        num_of_actions = env.action_space
+
+    # print("num_of_actions", num_of_actions)
+
     if optimizer is None:
         if args.optimizer == 'RMSprop':
             optimizer = optim.RMSprop(shared_model.parameters(), lr=args.lr)
@@ -24,10 +40,19 @@ def train(rank, args, shared_model, optimizer, env_conf):
             optimizer = optim.Adam(
                 shared_model.parameters(), lr=args.lr, amsgrad=args.amsgrad)
     env.seed(args.seed + rank)
+
+
+
     player = Agent(None, env, args, None)
+
+    # (Akshita): Get the action translator.
+    if convert_model:
+        player.translator = get_translator_from_source(args.env, args.model_env)
+        player.translate_test = True
+
     player.gpu_id = gpu_id
     player.model = A3Clstm(
-        player.env.observation_space.shape[0], player.env.action_space)
+        player.env.observation_space.shape[0], num_of_actions)
 
     player.state = player.env.reset()
     player.state = torch.from_numpy(player.state).float()
@@ -43,6 +68,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
                 player.model.load_state_dict(shared_model.state_dict())
         else:
             player.model.load_state_dict(shared_model.state_dict())
+
         if player.done:
             if gpu_id >= 0:
                 with torch.cuda.device(gpu_id):
@@ -56,6 +82,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
             player.hx = Variable(player.hx.data)
 
 
+        # print("num_steps", args.num_steps)
         for step in range(args.num_steps):
             player.action_train()
             if player.done:

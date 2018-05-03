@@ -5,6 +5,30 @@ import json
 import logging
 
 
+def get_translator(args):
+    return get_translator_from_source(args.model_env, args.env)
+
+def get_translator_from_source(source, target):
+    if 'DemonAttack' in target:
+        translate = [0, 1, 1,2,3,0,0]
+    elif 'Tennis' in target and 'Tennis' in source:
+        translate = [0, 1, 0, 3, 4, 0, 3, 4, 3, 4, 1, 11, 12, 1, 11, 12, 11, 12]
+    elif 'Assault' in target:
+        translate = [0, 2, 3,4,3,4]
+    elif 'Breakout' in target and 'Tennis' in source:
+        translate = [0 ,1 , 0, 2, 3, 0, 2, 3, 2, 3, 1, 2, 3, 1 , 2, 3, 2, 3]
+    elif 'Pong' in target and 'Tennis' in source:
+        translate = [0 ,1 , 0, 2, 3, 0, 2, 3, 2, 3, 1, 4, 5, 1 , 4, 5, 4, 5]
+    elif 'Pong' in target:
+        translate = [0,1,4,5]
+    elif 'Breakout' in target:
+        translate = [0,1,2,3, 2, 3]
+    elif 'Tennis' in target:
+        translate = [0,1,3,4, 3, 4]
+    else:
+        raise Exception("Cant translate enviroment: {}".format(target))
+    return translate
+
 def setup_logger(logger_name, log_file, level=logging.INFO):
     l = logging.getLogger(logger_name)
     formatter = logging.Formatter('%(asctime)s : %(message)s')
