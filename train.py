@@ -11,7 +11,7 @@ from transfer_util import frame2attention
 from utils import get_translator_from_source
 
 
-def train(rank, args, shared_model, optimizer, env_conf, model_env_conf=None, convert_model=False, convertor=None):
+def train(rank, args, shared_model, optimizer, env_conf, model_env_conf=None, convertor=None, convertor_config=None, mapFrames=False):
     ptitle('Training Agent: {}'.format(rank))
     gpu_id = args.gpu_ids[rank % len(args.gpu_ids)]
     torch.manual_seed(args.seed + rank)
@@ -22,8 +22,8 @@ def train(rank, args, shared_model, optimizer, env_conf, model_env_conf=None, co
     # TODO(Sowmya and Akshita): Make sure that the arguments of atari_env match the function. They currently do not.
     # env = atari_env(args.env, env_conf, args)
     num_of_actions = 4
-    if convert_model:
-        env = atari_env("{}".format(args.model_env), model_env_conf, args)
+    if mapFrames:
+        env = atari_env("{}".format(args.model_env), model_env_conf, args, convertor, convertor_config, mapFrames)
         # env_id = args.model_env
         num_of_actions = atari_env("{}".format(args.env), env_conf, args).action_space
     else:
@@ -46,7 +46,7 @@ def train(rank, args, shared_model, optimizer, env_conf, model_env_conf=None, co
     player = Agent(None, env, args, None)
 
     # (Akshita): Get the action translator.
-    if convert_model:
+    if mapFrames:
         player.translator = get_translator_from_source(args.env, args.model_env)
         player.translate_test = True
 

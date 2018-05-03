@@ -8,11 +8,11 @@ from cv2 import resize
 #from skimage.transform import resize
 #from scipy.misc import imresize as resize
 import random
-from transfer_util import frame2attention
+from transfer_util import *
 import cv2
 from skimage.color import rgb2gray
 
-def atari_env(env_id, env_conf, args):
+def atari_env(env_id, env_conf, args, convertor=None, convertor_config=None, mapFrames=False):
     env = gym.make(env_id)
     if 'NoFrameskip' in env_id:
         assert 'NoFrameskip' in env.spec.id
@@ -21,19 +21,17 @@ def atari_env(env_id, env_conf, args):
     env = EpisodicLifeEnv(env)
     if 'FIRE' in env.unwrapped.get_action_meanings():
         env = FireResetEnv(env)
-    env = AtariRescale(env, env_conf)
+    env = AtariRescale(env, env_conf, convertor, convertor_config, mapFrames)
     env = NormalizedEnv(env)
     return env
 
 
 def process_frame(frame, conf):
-    frame = frame[conf["crop1"]:conf["crop2"] + 160, :160]
-    if False:
-        frame = frame.mean(2)
-        frame = frame.astype(np.float32)
-        frame *= (1.0 / 255.0)
-    else:
-        frame = rgb2gray(frame)
+    #frame = frame[conf["crop1"]:conf["crop2"] + 160, :160]
+    frame = frame.mean(2)
+    frame = frame.astype(np.float32)
+    frame *= (1.0 / 255.0)
+    #frame = rgb2gray(frame)
     frame = resize(frame, (80, conf["dimension2"]))
     frame = resize(frame, (80, 80))
     frame = np.reshape(frame, [1, 80, 80])
@@ -41,14 +39,21 @@ def process_frame(frame, conf):
 
 
 class AtariRescale(gym.ObservationWrapper):
-    def __init__(self, env, env_conf):
+    def __init__(self, env, env_conf, convertor, convertor_config, mapFrames):
         gym.ObservationWrapper.__init__(self, env)
         self.observation_space = Box(0.0, 1.0, [1, 80, 80], dtype=np.uint8)
         self.conf = env_conf
+        self.map_frames = mapFrames
+        self.gan_trainer = convertor
+        self.gan_config = convertor_config
 
     def observation(self, observation):
         frame, _, _, _ = frame2attention(observation, self.conf, str(self.env.spec))
-        return process_frame(observation, self.conf)
+        cv2.imwrite('input.jpg', frame)
+        if self.map_frames:
+            print('Calling visual mapper')
+            frame = attention_process_frame(frame, self.gan_trainer, self.gan_config)
+        return process_frame(frame, self.conf)
 
 
 class NormalizedEnv(gym.ObservationWrapper):

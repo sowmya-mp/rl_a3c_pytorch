@@ -12,10 +12,12 @@ from test import test
 from shared_optim import SharedRMSprop, SharedAdam
 #from gym.configuration import undo_logger_setup
 import time
-
+from tools import *
+from trainers import *
 
 #undo_logger_setup()
 parser = argparse.ArgumentParser(description='A3C')
+parser.add_argument('--gpu', type=int, help="gpu id", default=0)
 parser.add_argument(
     '--lr',
     type=float,
@@ -125,6 +127,12 @@ parser.add_argument(
     default=4,
     metavar='SR',
     help='frame skip rate (default: 4)')
+parser.add_argument(
+    '--use_convertor',
+    default=False,
+    type=bool,
+    metavar='ENV',
+    help='If should use the mapper')
 
 # (Akshita) Arguments required for transfer learning.
 parser.add_argument(
@@ -164,15 +172,35 @@ if __name__ == '__main__':
     for i in setup_json.keys():
         if i in args.env:
             env_conf = setup_json[i]
-    env = atari_env(args.env, env_conf, args)
 
-    #(Akshita): Set up environment for the source game as well.
-    setup_json = read_config(args.model_env_config)
-    model_env_conf = setup_json["Default"]
-    for i in setup_json.keys():
-        if i in args.model_env:
-            model_env_conf = setup_json[i]
-    model_env = atari_env(args.model_env, model_env_conf, args)
+    if args.use_convertor:
+        convertor_config = NetConfig('conversion_models/attention_breakout2pong_dual.yaml')
+        hyperparameters = {}
+        for key in convertor_config.hyperparameters:
+            exec ('hyperparameters[\'%s\'] = convertor_config.hyperparameters[\'%s\']' % (key, key))
+
+        trainer = []
+        exec ("trainer=%s(convertor_config.hyperparameters)" % convertor_config.hyperparameters['trainer'])
+        trainer.gen.load_state_dict(torch.load('/home/amittel/Desktop/CMU/DRL/rl_a3c_pytorch/conversion_models/attentionbreakout2pong_v0_gen_00003500.pkl'))
+        trainer.gen.eval()
+        #trainer.cuda(args.gpu)
+        trainer.share_memory()
+        distance_gan = trainer
+    else:
+        convertor_config = None
+        distance_gan = None
+    convertor = distance_gan
+
+    env = atari_env(args.env, env_conf, args, None, None, mapFrames=False)
+
+    model_env = None
+    if args.use_convertor:
+        setup_json = read_config(args.model_env_config)
+        model_env_conf = setup_json["Default"]
+        for i in setup_json.keys():
+            if i in args.model_env:
+                model_env_conf = setup_json[i]
+        model_env = atari_env(args.model_env, model_env_conf, args)
 
 
     shared_model = A3Clstm(env.observation_space.shape[0], env.action_space)
@@ -208,17 +236,19 @@ if __name__ == '__main__':
     time.sleep(0.1)
     for rank in range(0, args.workers):
         p = mp.Process(target=train, args=(
-            rank, args, shared_model, optimizer, env_conf))
+            rank, args, shared_model, optimizer, env_conf, None, None, None, False))
         p.start()
         processes.append(p)
         time.sleep(0.1)
-    # (Akshita): Adding the conversion workers here.
-    for rank1 in range(rank + 1, rank + 1 + args.workers_transfer):
-        p = mp.Process(target=train, args=(
-            rank1, args, shared_model, optimizer, env_conf, model_env_conf, True))
-        p.start()
-        processes.append(p)
-        time.sleep(0.1)
+
+    if args.use_convertor:
+        for rank1 in range(rank + 1, rank + 1 + args.workers_transfer):
+            p = mp.Process(target=train, args=(
+                rank1, args, shared_model, optimizer, env_conf, model_env_conf, convertor, convertor_config, True))
+            p.start()
+            processes.append(p)
+            time.sleep(0.1)
+
     for p in processes:
         time.sleep(0.1)
         p.join()

@@ -11,7 +11,7 @@ import logging
 from transfer_util import frame2attention
 
 
-def test(args, shared_model, env_conf):
+def test(args, shared_model, env_conf, convertor=None, convertor_config=None, mapFrames=False):
     ptitle('Test Agent')
     gpu_id = args.gpu_ids[-1]
     log = {}
@@ -26,7 +26,7 @@ def test(args, shared_model, env_conf):
     torch.manual_seed(args.seed)
     if gpu_id >= 0:
         torch.cuda.manual_seed(args.seed)
-    env = atari_env(args.env, env_conf, args)
+    env = atari_env(args.env, env_conf, args, convertor, convertor_config, mapFrames)
     reward_sum = 0
     start_time = time.time()
     num_tests = 0
@@ -78,11 +78,13 @@ def test(args, shared_model, env_conf):
                                   time.gmtime(time.time() - start_time)),
                     reward_sum, player.eps_len, reward_mean))
 
+            print("Save", args.save_max, reward_sum, max_score)
             if args.save_max and reward_sum >= max_score:
                 max_score = reward_sum
                 if gpu_id >= 0:
                     with torch.cuda.device(gpu_id):
                         state_to_save = player.model.state_dict()
+                        print('{0}{1}.dat'.format(args.save_model_dir, args.env))
                         torch.save(state_to_save, '{0}{1}.dat'.format(args.save_model_dir, args.env))
                 else:
                     state_to_save = player.model.state_dict()
