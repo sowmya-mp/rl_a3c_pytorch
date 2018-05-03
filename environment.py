@@ -52,6 +52,7 @@ class AtariRescale(gym.ObservationWrapper):
     def observation(self, observation):
         frame, _, _, _ = frame2attention(observation, self.conf, str(self.env.spec))
         if self.map_frames:
+            print('Calling visual mapper')
             frame = attention_process_frame(frame, self.gan_trainer, self.gan_config)
         return process_frame(frame, self.conf)
 

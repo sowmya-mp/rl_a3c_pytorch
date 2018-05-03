@@ -10,13 +10,13 @@ from torch.autograd import Variable
 from transfer_util import frame2attention
 
 
-def train(rank, args, shared_model, optimizer, env_conf):
+def train(rank, args, shared_model, optimizer, env_conf, convertor=None, convertor_config=None, mapFrames=False):
     ptitle('Training Agent: {}'.format(rank))
     gpu_id = args.gpu_ids[rank % len(args.gpu_ids)]
     torch.manual_seed(args.seed + rank)
     if gpu_id >= 0:
         torch.cuda.manual_seed(args.seed + rank)
-    env = atari_env(args.env, env_conf, args)
+    env = atari_env(args.env, env_conf, args, convertor, convertor_config, mapFrames)
     if optimizer is None:
         if args.optimizer == 'RMSprop':
             optimizer = optim.RMSprop(shared_model.parameters(), lr=args.lr)

@@ -17,6 +17,7 @@ from trainers import *
 
 #undo_logger_setup()
 parser = argparse.ArgumentParser(description='A3C')
+parser.add_argument('--gpu', type=int, help="gpu id", default=0)
 parser.add_argument(
     '--lr',
     type=float,
@@ -161,8 +162,10 @@ if __name__ == '__main__':
 
         trainer = []
         exec ("trainer=%s(convertor_config.hyperparameters)" % convertor_config.hyperparameters['trainer'])
-        trainer.gen.load_state_dict(torch.load('/Users/sowmya/PycharmProjects/rl_a3c_pytorch/conversion_models/attentionbreakout2pong_v0_gen_00003500.pkl'))
-        trainer.cuda(args.gpu_ids)
+        trainer.gen.load_state_dict(torch.load('/home/spmunuku/Project/DRL/rl_a3c_pytorch/conversion_models/attentionbreakout2pong_v0_gen_00003500.pkl'))
+        trainer.gen.eval()
+        #trainer.cuda(args.gpu)
+        trainer.share_memory()
         distance_gan = trainer
     else:
         convertor_config = None
@@ -199,7 +202,7 @@ if __name__ == '__main__':
     time.sleep(0.1)
     for rank in range(0, args.workers):
         p = mp.Process(target=train, args=(
-            rank, args, shared_model, optimizer, env_conf))
+            rank, args, shared_model, optimizer, env_conf, convertor, convertor_config, False))
         p.start()
         processes.append(p)
         time.sleep(0.1)
