@@ -27,11 +27,10 @@ def atari_env(env_id, env_conf, args, convertor=None, convertor_config=None, map
 
 
 def process_frame(frame, conf):
-    #frame = frame[conf["crop1"]:conf["crop2"] + 160, :160]
+    #frame = frame[conf["crop1"]:conf["crop2"] + 160, :160
     frame = frame.mean(2)
     frame = frame.astype(np.float32)
     frame *= (1.0 / 255.0)
-    #frame = rgb2gray(frame)
     frame = resize(frame, (80, conf["dimension2"]))
     frame = resize(frame, (80, 80))
     frame = np.reshape(frame, [1, 80, 80])
