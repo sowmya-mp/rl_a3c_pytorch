@@ -179,13 +179,14 @@ if __name__ == '__main__':
         for key in convertor_config.hyperparameters:
             exec ('hyperparameters[\'%s\'] = convertor_config.hyperparameters[\'%s\']' % (key, key))
 
-        trainer = []
-        exec ("trainer=%s(convertor_config.hyperparameters)" % convertor_config.hyperparameters['trainer'])
-        trainer.gen.load_state_dict(torch.load('/home/amittel/Desktop/CMU/DRL/rl_a3c_pytorch/conversion_models/attentionbreakout2pong_v0_gen_00003500.pkl'))
-        trainer.gen.eval()
+        #trainer = []
+        #exec ("trainer=%s(convertor_config.hyperparameters)" % convertor_config.hyperparameters['trainer'])
+        #trainer.gen.load_state_dict(torch.load('/home/spmunuku/Project/DRL/rl_a3c_pytorch/conversion_models/attentionbreakout2pong_v0_gen_00003500.pkl'))
+        #trainer.gen.eval()
         #trainer.cuda(args.gpu)
-        trainer.share_memory()
-        distance_gan = trainer
+        #trainer.share_memory()
+        #distance_gan = trainer
+        distance_gan = None
     else:
         convertor_config = None
         distance_gan = None

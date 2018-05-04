@@ -19,9 +19,25 @@ def train(rank, args, shared_model, optimizer, env_conf, model_env_conf=None, co
         torch.cuda.manual_seed(args.seed + rank)
 
     # TODO(Akshita): Change this to make the environments as required.
-    # TODO(Sowmya and Akshita): Make sure that the arguments of atari_env match the function. They currently do not.
-    # env = atari_env(args.env, env_conf, args)
     num_of_actions = 4
+
+    if args.use_convertor:
+        #convertor_config = NetConfig('conversion_models/attention_breakout2pong_dual.yaml')
+        #hyperparameters = {}
+        #for key in convertor_config.hyperparameters:
+        #    exec ('hyperparameters[\'%s\'] = convertor_config.hyperparameters[\'%s\']' % (key, key))
+
+        trainer = []
+        exec ("trainer=%s(convertor_config.hyperparameters)" % convertor_config.hyperparameters['trainer'])
+        trainer.gen.load_state_dict(torch.load('/home/spmunuku/Project/DRL/rl_a3c_pytorch/conversion_models/attentionbreakout2pong_v0_gen_00003500.pkl'))
+        trainer.gen.eval()
+        #trainer.cuda(args.gpu)
+        distance_gan = trainer
+    else:
+        convertor_config = None
+        distance_gan = None
+    convertor = distance_gan
+
     if mapFrames:
         env = atari_env("{}".format(args.model_env), model_env_conf, args, convertor, convertor_config, mapFrames)
         # env_id = args.model_env
