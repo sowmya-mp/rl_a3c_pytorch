@@ -209,10 +209,26 @@ if __name__ == '__main__':
 
     # (TODO): We need to load the pretrained Pong weights so that the last layer (Ac-
     # tion spaces are different) does not get loaded.
+    #if args.load:
+    #    saved_state = torch.load('{0}{1}.dat'.format(
+    #        args.load_model_dir, args.env), map_location=lambda storage, loc: storage)
+    #    shared_model.load_state_dict(saved_state)
+    #shared_model.share_memory()
+
     if args.load:
+        print("In load; starting to load pretrained model.")
         saved_state = torch.load('{0}{1}.dat'.format(
-            args.load_model_dir, args.env), map_location=lambda storage, loc: storage)
-        shared_model.load_state_dict(saved_state)
+            args.load_model_dir, args.model_env), map_location=lambda storage, loc: storage)
+        print("Read the data from file {0}{1}.dat".format(args.load_model_dir, args.model_env))
+        #shared_model.load_state_dict(saved_state)
+        #print(shared_model.state_dict())
+        own_state = shared_model.state_dict()
+        for name, param in saved_state.items():
+            if 'actor' in name:
+                continue
+            own_state[name].copy_(param)
+        print("Copied the parameters.")
+        #print(shared_model.state_dict())
     shared_model.share_memory()
 
     if args.shared_optimizer:

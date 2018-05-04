@@ -1,29 +1,304 @@
-2018-05-03 01:14:00,356 : load: False
-2018-05-03 01:14:00,357 : load_model_dir: trained_models/
-2018-05-03 01:14:00,357 : env: Breakout-v0
-2018-05-03 01:14:00,357 : shared_optimizer: True
-2018-05-03 01:14:00,357 : count_lives: False
-2018-05-03 01:14:00,358 : model_env: Pong-v0
-2018-05-03 01:14:00,358 : workers_transfer: 2
-2018-05-03 01:14:00,358 : save_model_dir: trained_models/
-2018-05-03 01:14:00,358 : seed: 1
-2018-05-03 01:14:00,358 : num_steps: 20
-2018-05-03 01:14:00,358 : gamma: 0.99
-2018-05-03 01:14:00,358 : env_config: config.json
-2018-05-03 01:14:00,358 : lr: 0.0001
-2018-05-03 01:14:00,359 : workers: 2
-2018-05-03 01:14:00,359 : gpu: 0
-2018-05-03 01:14:00,359 : amsgrad: True
-2018-05-03 01:14:00,359 : max_episode_length: 10000
-2018-05-03 01:14:00,359 : optimizer: Adam
-2018-05-03 01:14:00,359 : log_dir: logs/
-2018-05-03 01:14:00,359 : skip_rate: 4
-2018-05-03 01:14:00,359 : use_convertor: True
-2018-05-03 01:14:00,360 : model_env_config: config.json
-2018-05-03 01:14:00,360 : save_max: True
-2018-05-03 01:14:00,360 : gpu_ids: [-1]
-2018-05-03 01:14:00,360 : tau: 1.0
-2018-05-03 01:14:03,795 : Time 00h 00m 03s, episode reward 4.0, episode length 352, reward mean 4.0000
-2018-05-03 01:14:15,231 : Time 00h 00m 14s, episode reward 0.0, episode length 167, reward mean 2.0000
-2018-05-03 01:14:26,472 : Time 00h 00m 25s, episode reward 0.0, episode length 158, reward mean 1.3333
-2018-05-03 01:14:38,059 : Time 00h 00m 37s, episode reward 1.0, episode length 200, reward mean 1.2500
+2018-05-04 09:37:10,961 : gamma: 0.99
+2018-05-04 09:37:10,961 : workers_transfer: 2
+2018-05-04 09:37:10,961 : workers: 4
+2018-05-04 09:37:10,962 : optimizer: Adam
+2018-05-04 09:37:10,962 : lr: 0.0001
+2018-05-04 09:37:10,962 : gpu_ids: [-1]
+2018-05-04 09:37:10,962 : model_env: Pong-v0
+2018-05-04 09:37:10,962 : skip_rate: 4
+2018-05-04 09:37:10,962 : save_max: True
+2018-05-04 09:37:10,962 : gpu: 0
+2018-05-04 09:37:10,962 : load_model_dir: trained_models/
+2018-05-04 09:37:10,962 : load: True
+2018-05-04 09:37:10,963 : tau: 1.0
+2018-05-04 09:37:10,963 : num_steps: 20
+2018-05-04 09:37:10,963 : shared_optimizer: True
+2018-05-04 09:37:10,963 : amsgrad: True
+2018-05-04 09:37:10,963 : seed: 1
+2018-05-04 09:37:10,963 : save_model_dir: trained_models/
+2018-05-04 09:37:10,963 : max_episode_length: 10000
+2018-05-04 09:37:10,963 : env: Breakout-v0
+2018-05-04 09:37:10,963 : log_dir: logs/
+2018-05-04 09:37:10,963 : env_config: config.json
+2018-05-04 09:37:10,964 : model_env_config: config.json
+2018-05-04 09:37:10,964 : use_convertor: True
+2018-05-04 09:37:10,964 : count_lives: False
+2018-05-04 09:37:14,284 : Time 00h 00m 03s, episode reward 2.0, episode length 264, reward mean 2.0000
+2018-05-04 09:37:27,215 : Time 00h 00m 16s, episode reward 2.0, episode length 261, reward mean 2.0000
+2018-05-04 09:37:40,164 : Time 00h 00m 29s, episode reward 2.0, episode length 264, reward mean 2.0000
+2018-05-04 09:37:53,764 : Time 00h 00m 42s, episode reward 2.0, episode length 255, reward mean 2.0000
+2018-05-04 09:38:06,297 : Time 00h 00m 55s, episode reward 1.0, episode length 197, reward mean 1.8000
+2018-05-04 09:38:18,543 : Time 00h 01m 07s, episode reward 0.0, episode length 161, reward mean 1.5000
+2018-05-04 09:38:31,658 : Time 00h 01m 20s, episode reward 1.0, episode length 226, reward mean 1.4286
+2018-05-04 09:38:43,594 : Time 00h 01m 32s, episode reward 0.0, episode length 158, reward mean 1.2500
+2018-05-04 09:38:55,627 : Time 00h 01m 44s, episode reward 0.0, episode length 163, reward mean 1.1111
+2018-05-04 09:39:09,838 : Time 00h 01m 58s, episode reward 3.0, episode length 331, reward mean 1.3000
+2018-05-04 09:39:22,830 : Time 00h 02m 11s, episode reward 2.0, episode length 269, reward mean 1.3636
+2018-05-04 09:39:35,705 : Time 00h 02m 24s, episode reward 0.0, episode length 166, reward mean 1.2500
+2018-05-04 09:39:48,700 : Time 00h 02m 37s, episode reward 2.0, episode length 264, reward mean 1.3077
+2018-05-04 09:40:02,082 : Time 00h 02m 50s, episode reward 2.0, episode length 261, reward mean 1.3571
+2018-05-04 09:40:15,145 : Time 00h 03m 04s, episode reward 2.0, episode length 265, reward mean 1.4000
+2018-05-04 09:40:28,196 : Time 00h 03m 17s, episode reward 2.0, episode length 254, reward mean 1.4375
+2018-05-04 09:40:40,122 : Time 00h 03m 29s, episode reward 0.0, episode length 170, reward mean 1.3529
+2018-05-04 09:40:53,599 : Time 00h 03m 42s, episode reward 2.0, episode length 254, reward mean 1.3889
+2018-05-04 09:43:06,253 : Time 00h 05m 55s, episode reward 0.0, episode length 10001, reward mean 1.3158
+2018-05-04 09:43:19,300 : Time 00h 06m 08s, episode reward 2.0, episode length 253, reward mean 1.3500
+2018-05-04 09:43:32,557 : Time 00h 06m 21s, episode reward 2.0, episode length 258, reward mean 1.3810
+2018-05-04 09:43:46,032 : Time 00h 06m 34s, episode reward 2.0, episode length 266, reward mean 1.4091
+2018-05-04 09:44:00,384 : Time 00h 06m 49s, episode reward 3.0, episode length 325, reward mean 1.4783
+2018-05-04 09:44:13,497 : Time 00h 07m 02s, episode reward 2.0, episode length 261, reward mean 1.5000
+2018-05-04 09:44:26,592 : Time 00h 07m 15s, episode reward 2.0, episode length 262, reward mean 1.5200
+2018-05-04 09:44:39,540 : Time 00h 07m 28s, episode reward 2.0, episode length 248, reward mean 1.5385
+2018-05-04 09:44:54,218 : Time 00h 07m 43s, episode reward 3.0, episode length 333, reward mean 1.5926
+2018-05-04 09:45:08,337 : Time 00h 07m 57s, episode reward 3.0, episode length 321, reward mean 1.6429
+2018-05-04 09:45:22,436 : Time 00h 08m 11s, episode reward 3.0, episode length 307, reward mean 1.6897
+2018-05-04 09:45:36,068 : Time 00h 08m 24s, episode reward 3.0, episode length 308, reward mean 1.7333
+2018-05-04 09:45:50,053 : Time 00h 08m 38s, episode reward 3.0, episode length 326, reward mean 1.7742
+2018-05-04 09:46:03,492 : Time 00h 08m 52s, episode reward 2.0, episode length 239, reward mean 1.7812
+2018-05-04 09:48:14,232 : Time 00h 11m 03s, episode reward 3.0, episode length 10000, reward mean 1.8182
+2018-05-04 09:48:28,541 : Time 00h 11m 17s, episode reward 4.0, episode length 364, reward mean 1.8824
+2018-05-04 09:48:44,203 : Time 00h 11m 33s, episode reward 4.0, episode length 428, reward mean 1.9429
+2018-05-04 09:48:58,133 : Time 00h 11m 47s, episode reward 3.0, episode length 330, reward mean 1.9722
+2018-05-04 09:51:10,399 : Time 00h 13m 59s, episode reward 1.0, episode length 10002, reward mean 1.9459
+2018-05-04 09:51:25,085 : Time 00h 14m 13s, episode reward 4.0, episode length 340, reward mean 2.0000
+2018-05-04 09:51:39,769 : Time 00h 14m 28s, episode reward 5.0, episode length 403, reward mean 2.0769
+2018-05-04 09:51:54,526 : Time 00h 14m 43s, episode reward 4.0, episode length 387, reward mean 2.1250
+2018-05-04 09:52:11,072 : Time 00h 14m 59s, episode reward 7.0, episode length 564, reward mean 2.2439
+2018-05-04 09:52:26,798 : Time 00h 15m 15s, episode reward 5.0, episode length 454, reward mean 2.3095
+2018-05-04 09:54:41,834 : Time 00h 17m 30s, episode reward 9.0, episode length 10000, reward mean 2.4651
+2018-05-04 09:54:59,510 : Time 00h 17m 48s, episode reward 8.0, episode length 577, reward mean 2.5909
+2018-05-04 09:55:16,720 : Time 00h 18m 05s, episode reward 8.0, episode length 532, reward mean 2.7111
+2018-05-04 09:55:29,931 : Time 00h 18m 18s, episode reward 3.0, episode length 291, reward mean 2.7174
+2018-05-04 09:55:44,986 : Time 00h 18m 33s, episode reward 6.0, episode length 438, reward mean 2.7872
+2018-05-04 09:56:02,190 : Time 00h 18m 51s, episode reward 9.0, episode length 568, reward mean 2.9167
+2018-05-04 09:56:17,011 : Time 00h 19m 05s, episode reward 5.0, episode length 386, reward mean 2.9592
+2018-05-04 09:56:34,982 : Time 00h 19m 23s, episode reward 8.0, episode length 556, reward mean 3.0600
+2018-05-04 09:56:48,657 : Time 00h 19m 37s, episode reward 2.0, episode length 269, reward mean 3.0392
+2018-05-04 09:57:02,205 : Time 00h 19m 51s, episode reward 2.0, episode length 237, reward mean 3.0192
+2018-05-04 09:57:20,977 : Time 00h 20m 09s, episode reward 10.0, episode length 640, reward mean 3.1509
+2018-05-04 09:57:38,119 : Time 00h 20m 27s, episode reward 7.0, episode length 532, reward mean 3.2222
+2018-05-04 09:57:50,773 : Time 00h 20m 39s, episode reward 2.0, episode length 236, reward mean 3.2000
+2018-05-04 09:58:09,035 : Time 00h 20m 57s, episode reward 10.0, episode length 695, reward mean 3.3214
+2018-05-04 09:58:23,947 : Time 00h 21m 12s, episode reward 6.0, episode length 422, reward mean 3.3684
+2018-05-04 09:58:41,433 : Time 00h 21m 30s, episode reward 8.0, episode length 577, reward mean 3.4483
+2018-05-04 09:58:54,657 : Time 00h 21m 43s, episode reward 2.0, episode length 238, reward mean 3.4237
+2018-05-04 09:59:09,516 : Time 00h 21m 58s, episode reward 5.0, episode length 382, reward mean 3.4500
+2018-05-04 09:59:22,478 : Time 00h 22m 11s, episode reward 2.0, episode length 243, reward mean 3.4262
+2018-05-04 09:59:37,987 : Time 00h 22m 26s, episode reward 6.0, episode length 426, reward mean 3.4677
+2018-05-04 09:59:51,598 : Time 00h 22m 40s, episode reward 3.0, episode length 286, reward mean 3.4603
+2018-05-04 10:00:03,900 : Time 00h 22m 52s, episode reward 1.0, episode length 201, reward mean 3.4219
+2018-05-04 10:00:19,117 : Time 00h 23m 08s, episode reward 5.0, episode length 389, reward mean 3.4462
+2018-05-04 10:00:32,137 : Time 00h 23m 21s, episode reward 2.0, episode length 241, reward mean 3.4242
+2018-05-04 10:00:49,300 : Time 00h 23m 38s, episode reward 9.0, episode length 557, reward mean 3.5075
+2018-05-04 10:01:04,701 : Time 00h 23m 53s, episode reward 6.0, episode length 436, reward mean 3.5441
+2018-05-04 10:01:19,489 : Time 00h 24m 08s, episode reward 5.0, episode length 393, reward mean 3.5652
+2018-05-04 10:01:37,102 : Time 00h 24m 25s, episode reward 10.0, episode length 644, reward mean 3.6571
+2018-05-04 10:01:54,627 : Time 00h 24m 43s, episode reward 9.0, episode length 600, reward mean 3.7324
+2018-05-04 10:02:12,462 : Time 00h 25m 01s, episode reward 14.0, episode length 658, reward mean 3.8750
+2018-05-04 10:02:29,903 : Time 00h 25m 18s, episode reward 8.0, episode length 576, reward mean 3.9315
+2018-05-04 10:02:45,029 : Time 00h 25m 33s, episode reward 6.0, episode length 442, reward mean 3.9595
+2018-05-04 10:03:02,970 : Time 00h 25m 51s, episode reward 10.0, episode length 640, reward mean 4.0400
+2018-05-04 10:03:16,459 : Time 00h 26m 05s, episode reward 3.0, episode length 280, reward mean 4.0263
+2018-05-04 10:03:32,108 : Time 00h 26m 20s, episode reward 6.0, episode length 451, reward mean 4.0519
+2018-05-04 10:03:48,442 : Time 00h 26m 37s, episode reward 7.0, episode length 469, reward mean 4.0897
+2018-05-04 10:04:06,420 : Time 00h 26m 55s, episode reward 9.0, episode length 652, reward mean 4.1519
+2018-05-04 10:04:20,706 : Time 00h 27m 09s, episode reward 11.0, episode length 355, reward mean 4.2375
+2018-05-04 10:04:34,079 : Time 00h 27m 22s, episode reward 2.0, episode length 238, reward mean 4.2099
+2018-05-04 10:04:49,800 : Time 00h 27m 38s, episode reward 6.0, episode length 458, reward mean 4.2317
+2018-05-04 10:07:01,568 : Time 00h 29m 50s, episode reward 0.0, episode length 10003, reward mean 4.1807
+2018-05-04 10:09:13,697 : Time 00h 32m 02s, episode reward 1.0, episode length 10002, reward mean 4.1429
+2018-05-04 10:09:27,740 : Time 00h 32m 16s, episode reward 4.0, episode length 359, reward mean 4.1412
+2018-05-04 10:09:40,575 : Time 00h 32m 29s, episode reward 2.0, episode length 247, reward mean 4.1163
+2018-05-04 10:11:49,221 : Time 00h 34m 38s, episode reward 2.0, episode length 10001, reward mean 4.0920
+2018-05-04 10:12:04,525 : Time 00h 34m 53s, episode reward 6.0, episode length 463, reward mean 4.1136
+2018-05-04 10:12:21,876 : Time 00h 35m 10s, episode reward 9.0, episode length 602, reward mean 4.1685
+2018-05-04 10:12:38,273 : Time 00h 35m 27s, episode reward 8.0, episode length 553, reward mean 4.2111
+2018-05-04 10:14:46,367 : Time 00h 37m 35s, episode reward 0.0, episode length 10003, reward mean 4.1648
+2018-05-04 10:15:04,525 : Time 00h 37m 53s, episode reward 9.0, episode length 617, reward mean 4.2174
+2018-05-04 10:15:19,986 : Time 00h 38m 08s, episode reward 5.0, episode length 425, reward mean 4.2258
+2018-05-04 10:17:35,710 : Time 00h 40m 24s, episode reward 4.0, episode length 10002, reward mean 4.2234
+2018-05-04 10:17:54,220 : Time 00h 40m 43s, episode reward 9.0, episode length 596, reward mean 4.2737
+2018-05-04 10:20:05,329 : Time 00h 42m 54s, episode reward 2.0, episode length 10002, reward mean 4.2500
+2018-05-04 10:22:20,300 : Time 00h 45m 09s, episode reward 10.0, episode length 10000, reward mean 4.3093
+2018-05-04 10:22:38,426 : Time 00h 45m 27s, episode reward 13.0, episode length 681, reward mean 4.3980
+2018-05-04 10:22:56,297 : Time 00h 45m 45s, episode reward 14.0, episode length 620, reward mean 4.4949
+2018-05-04 10:23:12,943 : Time 00h 46m 01s, episode reward 8.0, episode length 539, reward mean 4.5300
+2018-05-04 10:25:20,176 : Time 00h 48m 09s, episode reward 11.0, episode length 10000, reward mean 4.5941
+2018-05-04 10:25:35,135 : Time 00h 48m 24s, episode reward 4.0, episode length 340, reward mean 4.5882
+2018-05-04 10:25:53,452 : Time 00h 48m 42s, episode reward 11.0, episode length 693, reward mean 4.6505
+2018-05-04 10:26:13,593 : Time 00h 49m 02s, episode reward 15.0, episode length 874, reward mean 4.7500
+2018-05-04 10:26:30,233 : Time 00h 49m 19s, episode reward 6.0, episode length 485, reward mean 4.7619
+2018-05-04 10:26:52,677 : Time 00h 49m 41s, episode reward 22.0, episode length 1025, reward mean 4.9245
+2018-05-04 10:27:17,028 : Time 00h 50m 05s, episode reward 28.0, episode length 1230, reward mean 5.1402
+2018-05-04 10:27:38,506 : Time 00h 50m 27s, episode reward 18.0, episode length 839, reward mean 5.2593
+2018-05-04 10:28:06,364 : Time 00h 50m 55s, episode reward 31.0, episode length 1367, reward mean 5.4954
+2018-05-04 10:28:29,680 : Time 00h 51m 18s, episode reward 19.0, episode length 1035, reward mean 5.6182
+2018-05-04 10:28:48,411 : Time 00h 51m 37s, episode reward 19.0, episode length 768, reward mean 5.7387
+2018-05-04 10:29:17,314 : Time 00h 52m 06s, episode reward 38.0, episode length 1441, reward mean 6.0268
+2018-05-04 10:29:35,235 : Time 00h 52m 24s, episode reward 10.0, episode length 670, reward mean 6.0619
+2018-05-04 10:29:55,006 : Time 00h 52m 43s, episode reward 13.0, episode length 795, reward mean 6.1228
+2018-05-04 10:30:15,604 : Time 00h 53m 04s, episode reward 15.0, episode length 910, reward mean 6.2000
+2018-05-04 10:30:36,789 : Time 00h 53m 25s, episode reward 23.0, episode length 921, reward mean 6.3448
+2018-05-04 10:31:00,302 : Time 00h 53m 49s, episode reward 21.0, episode length 1066, reward mean 6.4701
+2018-05-04 10:31:20,424 : Time 00h 54m 09s, episode reward 19.0, episode length 782, reward mean 6.5763
+2018-05-04 10:31:38,142 : Time 00h 54m 27s, episode reward 8.0, episode length 585, reward mean 6.5882
+2018-05-04 10:31:57,274 : Time 00h 54m 46s, episode reward 11.0, episode length 688, reward mean 6.6250
+2018-05-04 10:32:15,250 : Time 00h 55m 04s, episode reward 12.0, episode length 581, reward mean 6.6694
+2018-05-04 10:32:35,769 : Time 00h 55m 24s, episode reward 15.0, episode length 863, reward mean 6.7377
+2018-05-04 10:32:56,595 : Time 00h 55m 45s, episode reward 15.0, episode length 888, reward mean 6.8049
+2018-05-04 10:33:11,785 : Time 00h 56m 00s, episode reward 7.0, episode length 450, reward mean 6.8065
+2018-05-04 10:33:38,102 : Time 00h 56m 26s, episode reward 27.0, episode length 1307, reward mean 6.9680
+2018-05-04 10:35:48,421 : Time 00h 58m 37s, episode reward 4.0, episode length 10000, reward mean 6.9444
+2018-05-04 10:36:11,947 : Time 00h 59m 00s, episode reward 23.0, episode length 1130, reward mean 7.0709
+2018-05-04 10:36:38,395 : Time 00h 59m 27s, episode reward 31.0, episode length 1282, reward mean 7.2578
+2018-05-04 10:37:01,620 : Time 00h 59m 50s, episode reward 21.0, episode length 966, reward mean 7.3643
+2018-05-04 10:37:21,342 : Time 01h 00m 10s, episode reward 17.0, episode length 804, reward mean 7.4385
+2018-05-04 10:37:44,686 : Time 01h 00m 33s, episode reward 22.0, episode length 1052, reward mean 7.5496
+2018-05-04 10:38:06,755 : Time 01h 00m 55s, episode reward 18.0, episode length 1007, reward mean 7.6288
+2018-05-04 10:38:33,901 : Time 01h 01m 22s, episode reward 29.0, episode length 1287, reward mean 7.7895
+2018-05-04 10:38:54,656 : Time 01h 01m 43s, episode reward 16.0, episode length 885, reward mean 7.8507
+2018-05-04 10:39:29,749 : Time 01h 02m 18s, episode reward 68.0, episode length 1907, reward mean 8.2963
+2018-05-04 10:39:53,196 : Time 01h 02m 42s, episode reward 27.0, episode length 1077, reward mean 8.4338
+2018-05-04 10:40:14,076 : Time 01h 03m 02s, episode reward 11.0, episode length 764, reward mean 8.4526
+2018-05-04 10:40:36,589 : Time 01h 03m 25s, episode reward 18.0, episode length 952, reward mean 8.5217
+2018-05-04 10:41:04,286 : Time 01h 03m 53s, episode reward 24.0, episode length 1367, reward mean 8.6331
+2018-05-04 10:41:31,376 : Time 01h 04m 20s, episode reward 35.0, episode length 1250, reward mean 8.8214
+2018-05-04 10:41:54,628 : Time 01h 04m 43s, episode reward 30.0, episode length 1109, reward mean 8.9716
+2018-05-04 10:42:19,508 : Time 01h 05m 08s, episode reward 29.0, episode length 1274, reward mean 9.1127
+2018-05-04 10:42:43,284 : Time 01h 05m 32s, episode reward 33.0, episode length 1197, reward mean 9.2797
+2018-05-04 10:43:11,656 : Time 01h 06m 00s, episode reward 44.0, episode length 1494, reward mean 9.5208
+2018-05-04 10:43:46,749 : Time 01h 06m 35s, episode reward 78.0, episode length 1964, reward mean 9.9931
+2018-05-04 10:44:08,922 : Time 01h 06m 57s, episode reward 15.0, episode length 951, reward mean 10.0274
+2018-05-04 10:44:34,227 : Time 01h 07m 23s, episode reward 32.0, episode length 1212, reward mean 10.1769
+2018-05-04 10:44:52,800 : Time 01h 07m 41s, episode reward 13.0, episode length 679, reward mean 10.1959
+2018-05-04 10:45:17,127 : Time 01h 08m 06s, episode reward 26.0, episode length 1135, reward mean 10.3020
+2018-05-04 10:45:42,359 : Time 01h 08m 31s, episode reward 37.0, episode length 1278, reward mean 10.4800
+2018-05-04 10:46:08,797 : Time 01h 08m 57s, episode reward 29.0, episode length 1264, reward mean 10.6026
+2018-05-04 10:46:35,706 : Time 01h 09m 24s, episode reward 42.0, episode length 1451, reward mean 10.8092
+2018-05-04 10:47:06,510 : Time 01h 09m 55s, episode reward 59.0, episode length 1726, reward mean 11.1242
+2018-05-04 10:47:29,990 : Time 01h 10m 18s, episode reward 34.0, episode length 1085, reward mean 11.2727
+2018-05-04 10:47:57,698 : Time 01h 10m 46s, episode reward 36.0, episode length 1517, reward mean 11.4323
+2018-05-04 10:48:27,787 : Time 01h 11m 16s, episode reward 51.0, episode length 1691, reward mean 11.6859
+2018-05-04 10:48:56,264 : Time 01h 11m 45s, episode reward 37.0, episode length 1400, reward mean 11.8471
+2018-05-04 10:49:21,447 : Time 01h 12m 10s, episode reward 27.0, episode length 1253, reward mean 11.9430
+2018-05-04 10:49:48,189 : Time 01h 12m 37s, episode reward 36.0, episode length 1407, reward mean 12.0943
+2018-05-04 10:50:24,210 : Time 01h 13m 13s, episode reward 64.0, episode length 2019, reward mean 12.4187
+2018-05-04 10:50:57,007 : Time 01h 13m 45s, episode reward 49.0, episode length 1860, reward mean 12.6460
+2018-05-04 10:51:26,056 : Time 01h 14m 14s, episode reward 41.0, episode length 1473, reward mean 12.8210
+2018-05-04 10:51:46,568 : Time 01h 14m 35s, episode reward 18.0, episode length 814, reward mean 12.8528
+2018-05-04 10:52:14,467 : Time 01h 15m 03s, episode reward 39.0, episode length 1493, reward mean 13.0122
+2018-05-04 10:52:43,821 : Time 01h 15m 32s, episode reward 42.0, episode length 1463, reward mean 13.1879
+2018-05-04 10:53:13,288 : Time 01h 16m 02s, episode reward 49.0, episode length 1566, reward mean 13.4036
+2018-05-04 10:53:44,763 : Time 01h 16m 33s, episode reward 42.0, episode length 1578, reward mean 13.5749
+2018-05-04 10:54:04,614 : Time 01h 16m 53s, episode reward 16.0, episode length 813, reward mean 13.5893
+2018-05-04 10:54:28,628 : Time 01h 17m 17s, episode reward 30.0, episode length 1149, reward mean 13.6864
+2018-05-04 10:54:51,732 : Time 01h 17m 40s, episode reward 25.0, episode length 1140, reward mean 13.7529
+2018-05-04 10:55:18,518 : Time 01h 18m 07s, episode reward 43.0, episode length 1420, reward mean 13.9240
+2018-05-04 10:55:43,068 : Time 01h 18m 31s, episode reward 32.0, episode length 1133, reward mean 14.0291
+2018-05-04 10:57:52,792 : Time 01h 20m 41s, episode reward 2.0, episode length 10002, reward mean 13.9595
+2018-05-04 10:58:23,927 : Time 01h 21m 12s, episode reward 57.0, episode length 1707, reward mean 14.2069
+2018-05-04 10:58:54,661 : Time 01h 21m 43s, episode reward 36.0, episode length 1629, reward mean 14.3314
+2018-05-04 10:59:20,902 : Time 01h 22m 09s, episode reward 47.0, episode length 1369, reward mean 14.5170
+2018-05-04 10:59:57,789 : Time 01h 22m 46s, episode reward 67.0, episode length 2063, reward mean 14.8136
+2018-05-04 11:00:25,047 : Time 01h 23m 13s, episode reward 43.0, episode length 1397, reward mean 14.9719
+2018-05-04 11:00:52,220 : Time 01h 23m 41s, episode reward 30.0, episode length 1379, reward mean 15.0559
+2018-05-04 11:01:12,526 : Time 01h 24m 01s, episode reward 17.0, episode length 817, reward mean 15.0667
+2018-05-04 11:01:42,357 : Time 01h 24m 31s, episode reward 37.0, episode length 1469, reward mean 15.1878
+2018-05-04 11:02:15,951 : Time 01h 25m 04s, episode reward 83.0, episode length 1986, reward mean 15.5604
+2018-05-04 11:02:50,869 : Time 01h 25m 39s, episode reward 56.0, episode length 2009, reward mean 15.7814
+2018-05-04 11:03:14,882 : Time 01h 26m 03s, episode reward 23.0, episode length 1107, reward mean 15.8207
+2018-05-04 11:03:42,412 : Time 01h 26m 31s, episode reward 51.0, episode length 1420, reward mean 16.0108
+2018-05-04 11:04:09,286 : Time 01h 26m 58s, episode reward 45.0, episode length 1357, reward mean 16.1667
+2018-05-04 11:04:45,885 : Time 01h 27m 34s, episode reward 73.0, episode length 2014, reward mean 16.4706
+2018-05-04 11:06:58,545 : Time 01h 29m 47s, episode reward 9.0, episode length 10001, reward mean 16.4309
+2018-05-04 11:07:26,043 : Time 01h 30m 14s, episode reward 25.0, episode length 1374, reward mean 16.4762
+2018-05-04 11:08:00,568 : Time 01h 30m 49s, episode reward 75.0, episode length 1924, reward mean 16.7842
+2018-05-04 11:08:24,610 : Time 01h 31m 13s, episode reward 22.0, episode length 1067, reward mean 16.8115
+2018-05-04 11:08:52,225 : Time 01h 31m 41s, episode reward 37.0, episode length 1449, reward mean 16.9167
+2018-05-04 11:09:12,985 : Time 01h 32m 01s, episode reward 21.0, episode length 862, reward mean 16.9378
+2018-05-04 11:09:44,252 : Time 01h 32m 33s, episode reward 51.0, episode length 1838, reward mean 17.1134
+2018-05-04 11:10:19,707 : Time 01h 33m 08s, episode reward 93.0, episode length 2021, reward mean 17.5026
+2018-05-04 11:10:46,830 : Time 01h 33m 35s, episode reward 35.0, episode length 1383, reward mean 17.5918
+2018-05-04 11:11:09,103 : Time 01h 33m 57s, episode reward 29.0, episode length 1054, reward mean 17.6497
+2018-05-04 11:11:25,862 : Time 01h 34m 14s, episode reward 9.0, episode length 555, reward mean 17.6061
+2018-05-04 11:11:51,596 : Time 01h 34m 40s, episode reward 30.0, episode length 1278, reward mean 17.6683
+2018-05-04 11:12:18,286 : Time 01h 35m 07s, episode reward 47.0, episode length 1402, reward mean 17.8150
+2018-05-04 11:12:46,591 : Time 01h 35m 35s, episode reward 42.0, episode length 1446, reward mean 17.9353
+2018-05-04 11:13:17,368 : Time 01h 36m 06s, episode reward 41.0, episode length 1644, reward mean 18.0495
+2018-05-04 11:13:44,570 : Time 01h 36m 33s, episode reward 51.0, episode length 1321, reward mean 18.2118
+2018-05-04 11:14:13,537 : Time 01h 37m 02s, episode reward 46.0, episode length 1503, reward mean 18.3480
+2018-05-04 11:14:48,734 : Time 01h 37m 37s, episode reward 84.0, episode length 2111, reward mean 18.6683
+2018-05-04 11:15:27,333 : Time 01h 38m 16s, episode reward 87.0, episode length 2227, reward mean 19.0000
+2018-05-04 11:17:40,042 : Time 01h 40m 28s, episode reward 3.0, episode length 10001, reward mean 18.9227
+2018-05-04 11:18:14,169 : Time 01h 41m 03s, episode reward 65.0, episode length 1934, reward mean 19.1442
+2018-05-04 11:18:48,184 : Time 01h 41m 37s, episode reward 67.0, episode length 1983, reward mean 19.3732
+2018-05-04 11:19:13,168 : Time 01h 42m 02s, episode reward 42.0, episode length 1152, reward mean 19.4810
+2018-05-04 11:19:39,208 : Time 01h 42m 28s, episode reward 39.0, episode length 1304, reward mean 19.5735
+2018-05-04 11:20:11,270 : Time 01h 43m 00s, episode reward 77.0, episode length 1606, reward mean 19.8443
+2018-05-04 11:20:40,569 : Time 01h 43m 29s, episode reward 43.0, episode length 1533, reward mean 19.9531
+2018-05-04 11:21:11,507 : Time 01h 44m 00s, episode reward 72.0, episode length 1660, reward mean 20.1963
+2018-05-04 11:21:43,159 : Time 01h 44m 32s, episode reward 54.0, episode length 1767, reward mean 20.3535
+2018-05-04 11:22:10,859 : Time 01h 44m 59s, episode reward 47.0, episode length 1500, reward mean 20.4769
+2018-05-04 11:22:47,624 : Time 01h 45m 36s, episode reward 89.0, episode length 2142, reward mean 20.7926
+2018-05-04 11:23:23,516 : Time 01h 46m 12s, episode reward 96.0, episode length 2078, reward mean 21.1376
+2018-05-04 11:23:56,238 : Time 01h 46m 45s, episode reward 57.0, episode length 1755, reward mean 21.3014
+2018-05-04 11:24:20,572 : Time 01h 47m 09s, episode reward 24.0, episode length 1101, reward mean 21.3136
+2018-05-04 11:24:51,106 : Time 01h 47m 39s, episode reward 40.0, episode length 1598, reward mean 21.3982
+2018-05-04 11:25:25,231 : Time 01h 48m 14s, episode reward 99.0, episode length 1935, reward mean 21.7477
+2018-05-04 11:26:04,563 : Time 01h 48m 53s, episode reward 117.0, episode length 2338, reward mean 22.1749
+2018-05-04 11:26:40,114 : Time 01h 49m 29s, episode reward 87.0, episode length 2011, reward mean 22.4643
+2018-05-04 11:27:14,861 : Time 01h 50m 03s, episode reward 77.0, episode length 2007, reward mean 22.7067
+2018-05-04 11:27:48,803 : Time 01h 50m 37s, episode reward 109.0, episode length 1940, reward mean 23.0885
+2018-05-04 11:28:18,131 : Time 01h 51m 07s, episode reward 43.0, episode length 1552, reward mean 23.1762
+2018-05-04 11:28:46,219 : Time 01h 51m 35s, episode reward 54.0, episode length 1469, reward mean 23.3114
+2018-05-04 11:29:18,920 : Time 01h 52m 07s, episode reward 50.0, episode length 1829, reward mean 23.4279
+2018-05-04 11:29:49,962 : Time 01h 52m 38s, episode reward 56.0, episode length 1705, reward mean 23.5696
+2018-05-04 11:30:24,505 : Time 01h 53m 13s, episode reward 76.0, episode length 1977, reward mean 23.7965
+2018-05-04 11:30:53,210 : Time 01h 53m 42s, episode reward 55.0, episode length 1569, reward mean 23.9310
+2018-05-04 11:31:35,532 : Time 01h 54m 24s, episode reward 116.0, episode length 2505, reward mean 24.3262
+2018-05-04 11:32:08,562 : Time 01h 54m 57s, episode reward 64.0, episode length 1894, reward mean 24.4957
+2018-05-04 11:32:37,409 : Time 01h 55m 26s, episode reward 58.0, episode length 1585, reward mean 24.6383
+2018-05-04 11:33:08,291 : Time 01h 55m 57s, episode reward 63.0, episode length 1554, reward mean 24.8008
+2018-05-04 11:35:23,952 : Time 01h 58m 12s, episode reward 37.0, episode length 10000, reward mean 24.8523
+2018-05-04 11:35:57,766 : Time 01h 58m 46s, episode reward 84.0, episode length 1972, reward mean 25.1008
+2018-05-04 11:36:32,074 : Time 01h 59m 20s, episode reward 76.0, episode length 1841, reward mean 25.3138
+2018-05-04 11:37:07,957 : Time 01h 59m 56s, episode reward 99.0, episode length 1950, reward mean 25.6208
+2018-05-04 11:37:36,348 : Time 02h 00m 25s, episode reward 42.0, episode length 1460, reward mean 25.6888
+2018-05-04 11:38:11,157 : Time 02h 01m 00s, episode reward 107.0, episode length 1987, reward mean 26.0248
+2018-05-04 11:38:45,872 : Time 02h 01m 34s, episode reward 87.0, episode length 1956, reward mean 26.2757
+2018-05-04 11:40:59,465 : Time 02h 03m 48s, episode reward 19.0, episode length 10001, reward mean 26.2459
+2018-05-04 11:41:30,772 : Time 02h 04m 19s, episode reward 66.0, episode length 1634, reward mean 26.4082
+2018-05-04 11:42:03,787 : Time 02h 04m 52s, episode reward 80.0, episode length 1872, reward mean 26.6260
+2018-05-04 11:42:34,242 : Time 02h 05m 23s, episode reward 68.0, episode length 1621, reward mean 26.7935
+2018-05-04 11:43:05,743 : Time 02h 05m 54s, episode reward 57.0, episode length 1800, reward mean 26.9153
+2018-05-04 11:43:36,257 : Time 02h 06m 25s, episode reward 57.0, episode length 1685, reward mean 27.0361
+2018-05-04 11:44:07,203 : Time 02h 06m 56s, episode reward 56.0, episode length 1577, reward mean 27.1520
+2018-05-04 11:44:43,836 : Time 02h 07m 32s, episode reward 96.0, episode length 2016, reward mean 27.4263
+2018-05-04 11:45:17,679 : Time 02h 08m 06s, episode reward 61.0, episode length 1806, reward mean 27.5595
+2018-05-04 11:45:55,083 : Time 02h 08m 43s, episode reward 74.0, episode length 2067, reward mean 27.7431
+2018-05-04 11:46:32,624 : Time 02h 09m 21s, episode reward 94.0, episode length 2245, reward mean 28.0039
+2018-05-04 11:47:03,147 : Time 02h 09m 52s, episode reward 62.0, episode length 1578, reward mean 28.1373
+2018-05-04 11:49:18,102 : Time 02h 12m 06s, episode reward 16.0, episode length 10001, reward mean 28.0898
+2018-05-04 11:49:53,191 : Time 02h 12m 42s, episode reward 100.0, episode length 2092, reward mean 28.3696
+2018-05-04 11:50:28,440 : Time 02h 13m 17s, episode reward 68.0, episode length 1919, reward mean 28.5233
+2018-05-04 11:50:58,138 : Time 02h 13m 47s, episode reward 61.0, episode length 1651, reward mean 28.6486
+2018-05-04 11:51:31,687 : Time 02h 14m 20s, episode reward 66.0, episode length 1826, reward mean 28.7923
+2018-05-04 11:52:07,553 : Time 02h 14m 56s, episode reward 78.0, episode length 1962, reward mean 28.9808
+2018-05-04 11:52:48,624 : Time 02h 15m 37s, episode reward 212.0, episode length 2500, reward mean 29.6794
+2018-05-04 11:53:31,419 : Time 02h 16m 20s, episode reward 154.0, episode length 2551, reward mean 30.1521
+2018-05-04 11:54:01,590 : Time 02h 16m 50s, episode reward 54.0, episode length 1544, reward mean 30.2424
+2018-05-04 11:54:33,671 : Time 02h 17m 22s, episode reward 65.0, episode length 1863, reward mean 30.3736
+2018-05-04 11:55:10,116 : Time 02h 17m 59s, episode reward 85.0, episode length 2079, reward mean 30.5789
+2018-05-04 11:55:44,477 : Time 02h 18m 33s, episode reward 73.0, episode length 1966, reward mean 30.7378
+2018-05-04 11:56:16,814 : Time 02h 19m 05s, episode reward 111.0, episode length 1814, reward mean 31.0373
+2018-05-04 11:56:44,515 : Time 02h 19m 33s, episode reward 83.0, episode length 1435, reward mean 31.2305
+2018-05-04 11:59:00,407 : Time 02h 21m 49s, episode reward 32.0, episode length 10002, reward mean 31.2333
+2018-05-04 11:59:36,406 : Time 02h 22m 25s, episode reward 92.0, episode length 1983, reward mean 31.4576
+2018-05-04 12:01:55,423 : Time 02h 24m 44s, episode reward 68.0, episode length 10000, reward mean 31.5919
+2018-05-04 12:02:32,638 : Time 02h 25m 21s, episode reward 94.0, episode length 2121, reward mean 31.8205
+2018-05-04 12:04:48,369 : Time 02h 27m 37s, episode reward 0.0, episode length 10003, reward mean 31.7044
+2018-05-04 12:05:26,658 : Time 02h 28m 15s, episode reward 107.0, episode length 2355, reward mean 31.9782
+2018-05-04 12:05:55,953 : Time 02h 28m 44s, episode reward 60.0, episode length 1530, reward mean 32.0797
+2018-05-04 12:06:32,641 : Time 02h 29m 21s, episode reward 152.0, episode length 2059, reward mean 32.5126
+2018-05-04 12:07:07,459 : Time 02h 29m 56s, episode reward 87.0, episode length 2030, reward mean 32.7086
+2018-05-04 12:07:34,915 : Time 02h 30m 23s, episode reward 70.0, episode length 1494, reward mean 32.8423

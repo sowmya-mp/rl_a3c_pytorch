@@ -9,7 +9,8 @@ from player_util import Agent
 from torch.autograd import Variable
 from transfer_util import frame2attention
 from utils import get_translator_from_source
-
+from trainers import *
+import trainers
 
 def train(rank, args, shared_model, optimizer, env_conf, model_env_conf=None, convertor=None, convertor_config=None, mapFrames=False):
     ptitle('Training Agent: {}'.format(rank))
@@ -21,15 +22,18 @@ def train(rank, args, shared_model, optimizer, env_conf, model_env_conf=None, co
     # TODO(Akshita): Change this to make the environments as required.
     num_of_actions = 4
 
-    if args.use_convertor:
+    if args.use_convertor and mapFrames:
+        print("here")
         #convertor_config = NetConfig('conversion_models/attention_breakout2pong_dual.yaml')
         #hyperparameters = {}
         #for key in convertor_config.hyperparameters:
         #    exec ('hyperparameters[\'%s\'] = convertor_config.hyperparameters[\'%s\']' % (key, key))
-
+        #print('Here')
+        print(convertor_config.hyperparameters)
         trainer = []
-        exec ("trainer=%s(convertor_config.hyperparameters)" % convertor_config.hyperparameters['trainer'])
-        trainer.gen.load_state_dict(torch.load('/home/spmunuku/Project/DRL/rl_a3c_pytorch/conversion_models/attentionbreakout2pong_v0_gen_00003500.pkl'))
+        trainer = COCOGANGAMESDUALTrainer(convertor_config.hyperparameters)
+        #exec ("trainer=%s(convertor_config.hyperparameters)" % convertor_config.hyperparameters['trainer'])
+        trainer.gen.load_state_dict(torch.load('/home/amittel/Desktop/CMU/DRL/rl_a3c_pytorch/conversion_models/attentionbreakout2pong_v0_gen_00003500.pkl'))
         trainer.gen.eval()
         #trainer.cuda(args.gpu)
         distance_gan = trainer

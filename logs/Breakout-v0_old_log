@@ -1,0 +1,29 @@
+2018-05-04 09:35:39,903 : env: Breakout-v0
+2018-05-04 09:35:39,903 : workers_transfer: 2
+2018-05-04 09:35:39,903 : lr: 0.0001
+2018-05-04 09:35:39,904 : save_model_dir: trained_models/
+2018-05-04 09:35:39,904 : max_episode_length: 10000
+2018-05-04 09:35:39,904 : model_env_config: config.json
+2018-05-04 09:35:39,904 : use_convertor: True
+2018-05-04 09:35:39,904 : load: True
+2018-05-04 09:35:39,904 : amsgrad: True
+2018-05-04 09:35:39,904 : save_max: True
+2018-05-04 09:35:39,904 : env_config: config.json
+2018-05-04 09:35:39,904 : gamma: 0.99
+2018-05-04 09:35:39,905 : workers: 4
+2018-05-04 09:35:39,905 : gpu: 0
+2018-05-04 09:35:39,905 : num_steps: 20
+2018-05-04 09:35:39,905 : tau: 1.0
+2018-05-04 09:35:39,905 : shared_optimizer: True
+2018-05-04 09:35:39,905 : skip_rate: 4
+2018-05-04 09:35:39,905 : gpu_ids: [-1]
+2018-05-04 09:35:39,905 : optimizer: Adam
+2018-05-04 09:35:39,905 : count_lives: False
+2018-05-04 09:35:39,906 : model_env: Pong-v0
+2018-05-04 09:35:39,906 : log_dir: logs/
+2018-05-04 09:35:39,906 : seed: 1
+2018-05-04 09:35:39,906 : load_model_dir: trained_models/
+2018-05-04 09:35:43,577 : Time 00h 00m 03s, episode reward 2.0, episode length 263, reward mean 2.0000
+2018-05-04 09:35:55,569 : Time 00h 00m 15s, episode reward 0.0, episode length 161, reward mean 1.0000
+2018-05-04 09:36:10,275 : Time 00h 00m 30s, episode reward 4.0, episode length 372, reward mean 2.0000
+2018-05-04 09:36:22,224 : Time 00h 00m 42s, episode reward 0.0, episode length 164, reward mean 1.5000
